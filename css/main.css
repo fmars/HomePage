@@ -55,8 +55,12 @@
   padding-bottom: 30px;
 }
 
-#title-fmars{
+.title-fmars{
   font-family: "F2U Scratch";
+}
+
+#title-fmars h2{
+  font-family: "F2U Scratch"
 }
 
 #intro p{
@@ -67,7 +71,10 @@
   margin-top: 25px;
   margin-bottom: 15px;
 }
-
+#interest p{
+  font-family: 'Microsoft YaHei';
+  font-size: 12px;
+}
 #find-me-at{
   margin-top: 60px;
   margin-left: 25px;
