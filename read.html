@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Fmars.me | Homepage - Jiacheng Feng  </title>
+	<meta name="description" content="Fmars HomePage. I'm now a Software Engineer in Facebook. 
+	I believe that Inner happiness comes from self-sacrifice" />
+	<meta name="keywords" content="Jiacheng Feng, Fmars, Homepage, Facebook, Software Engineer" />
+	<meta name="author" content="Jiacheng Feng" />
+
+	<meta property="og:title" content="Fmars.me" />
+	<meta property="og:type" content="homepage" />
+	<meta property="og:url" content="http://fmars.me" />
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/msg_read.css">
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        //hide the all of the element with class msg_body
+        $(".msg_body").hide();
+        //toggle the componenet with class msg_body
+        $(".msg_head").click(function(){
+          $(this).next(".msg_body").slideToggle(250);
+        });
+      });
+    </script>
+    
+  </head>
+
+  <body>
+
+    <div class="row">
+      <div class="nav">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="container">
+            <ul class="pull-left">
+              <li class="tab"><a href="index.html" >Me</a></li>
+              <li class="tab"><a href="write.html" >Write</a></li>
+              <li class="tab"><a class="tab-now" href="read.html" style="color:black"><b>Read</b></a></li>
+              <li class="tab"><a href="atfb.html">x</a></li>
+            </ul>
+          </div>
+        </div>
+       </div> 
+    </div>
+
+    <h1 id="name" align='middle'>Fmars</h1>
+    <p id="belief" align='middle'><em>Inner happiness comes from self-sacrifice</em></p>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-6">
+        <h2 id='title-fmars'>Read</h2>
+        <div id="write-content">
+          <div class="msg_list">
+
+            <p class="msg_head">&rarr;浪潮之巅<span style="font-size:17px; float:right">03/2015</span></p>
+            <div class="msg_body">
+              <ul>
+                <li class="msg_body_author">吴军。JHU博士，原Google研究院资深研究员。10年离开Google，加盟腾讯，任腾讯主管搜索副总裁。12年离开腾讯回到Google。著《数学之美》、《浪潮之巅》和《文明之光》</li>
+                <li class="msg_body_referrence"><a href="http://book.douban.com/subject/6709783">浪潮之巅(豆瓣) - 豆瓣读书</a></li>
+                <li class="msg_body_review">从一百年前算起，AT&T、IMB、Apple、Intel、Microsoft、Cico、Yahoo和Google等公司先后被幸运推到技术革命的浪尖上，它们代表科技的浪潮，都曾经是全球性的帝国，极度辉煌。对公司来讲，赶上一次浪潮不能保证它长盛不衰；但对个人来讲，一生赶上这样一次浪潮就足够了。对于一个弄潮的年轻人来讲，最幸运的莫过于赶上一波大潮。</li>
+                 <li class="msg_body_review">微软始终是所有公司最可怕的竞争对手。它能否成功地第二次创业，很大程度上取决于客厅信息化是否能形成下一次技术革命的浪潮，而它又是否能在客厅争夺战中最终胜出。</li>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div id="find-me-at">
+          <ul>
+            <li><a target="_blank" href="http://fmarss.blogspot.com/">Blogger<br></br>
+              <small>(See What's New)</small></a></li>
+            <li><a target="_blank" href="https://github.com/fmars" >GitHub</a></li>
+            <li><a target="_blank" href="http://www.linkedin.com/pub/jiacheng-feng/41/63b/3a6">LinkedIn</a></li>
+          </ul>
+          <div id="visit-map">
+            <script type="text/javascript" src="http://je.revolvermaps.com/2/4.js?i=4tkc0xttkin&amp;m=0&amp;h=128&amp;c=ff0000&amp;r=0" async="async"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

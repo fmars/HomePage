@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> Fmars </title>
+    
+  </head>
+
+  <body>
+<span id="time">3</span>秒钟后自动跳转，如果不跳转，请点击下面的链接<br></br><a href="http://fmars.me/">Fmars的新主页</a>
+<script>
+    function delayUrl(url){
+        var clock = document.getElementById('time').innerHTML;
+        if(clock > 0){
+            clock--;
+            document.getElementById('time').innerHTML = clock;
+        }else{
+            window.location.href = url ;
+        }
+        setTimeout("delayUrl('" + url + "')",1000);
+    }
+    delayUrl("http://www.fmars.me/");
+     
+</script>
+
+  </body>
+</html>
