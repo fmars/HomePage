@@ -25,10 +25,14 @@
 
 .article-en h2{
   font-family: "F2U Scratch";
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .article-cn h2{
   font-family: 'Microsoft Song';
+  margin-top: 25px;
+  margin-bottom: 35px;
 }
 
 .article-en p{
@@ -36,7 +40,7 @@
   color: #707070;
   font-size: 16px;
   line-height: 1.6em;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-bottom: 15px;
 
 }
@@ -46,7 +50,7 @@
   color: #707070;
   font-size: 16px;
   line-height: 1.6em;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-bottom: 15px;
-
+  text-indent: 2em;
 }
