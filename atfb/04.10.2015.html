@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="-0.98923206329346"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-10 20:50:58 +0000"/><meta name="latitude" content="37.48481354812014"/><meta name="longitude" content="-122.1473615519262"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-10 23:25:31 +0000"/><title>04.10.2015</title></head><body>
+<div>10:00 TW fuck</div>
+<div>I'm doing a tupperware task #6462536 which need to create a PortAllocator to maintain all the allocated ports info. I can add the port into PortAllocator when it is reserved in bindAndSubstituteArgs or freePort method. However I don't know where does port bind and release happen because I didn't found bindSockets been called anywhere. So I don't know when should I release the port which has been added to PortAllocator.</div>
+<div><br/></div>
+<div>I don't want to risk breaking something else so I guess I should first understand the workflow of tupperware to solve this problem. Does anyone have some free time could show me the brief procedure about how tupperware init and setup from very beginning? I do appreciate. </div>
+<div><br/></div>
+<div>2:00 fbmake and fbconfig</div>
+<div>     config &amp; make tupperware/agent.... nothing found, nor know what to execute</div>
+<div><br/></div>
+<div>16:00</div>
+<div>     1. Is that good to implement bindAndSubstituteArgs in PortAllocator? Because this function also does a lot of other work except for bind port. Can I only expose a method maybe called 'findPort' in PortAllocator and keep bindAndSubstituteArgs still reside in AgentUtil. And replace the AgentUtil::freePort called in bindAndSubstituteArgs with PortAllocator::findPort?</div>
+<div>     2. Where can I detect if the agent crashes and restarts?</div>
+<div>     3. I know ports are released in clearPortsForPid in ProcessExecutor. I'm asking where do ports release which are allocated in DirectoryManager? Actually I think I need to figure out every exit point that process may stop or be killed in whole program scope to avoid port 'leak'. </div>
+<div><br/></div>
+<div>Question 2,3 maybe solved if I could have a overview of the total tw-agent program work flow. </div>
+</body></html>

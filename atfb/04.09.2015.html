@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="0.04213720560074"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-09 17:14:41 +0000"/><meta name="latitude" content="37.48477481696602"/><meta name="longitude" content="-122.1475379306791"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-10 16:17:09 +0000"/><title>04.09.2015</title></head><body>
+
+	<div>Daily</div>
+
+	<div>     Baidu hr</div>
+
+	<div>     张文凯 筷子</div>
+
+	<div>     fortunately everyone has a great understanding though my expression is so terrible</div>
+
+	<div>TODO</div>
+
+	<div>
+
+		<div>     c++11</div>
+
+		<div>     Mesos paper</div>
+
+	</div>
+
+	<div>     tire pressure</div>
+
+	<div>     --gmail confirmation</div>
+
+	<div>     chase freedom travel</div><div>401k</div>
+
+	<div><br/></div>
+
+	<div>10:00</div>
+
+	<div>     Mesos paper, zookeeper</div>
+
+	<div>10:30</div>
+
+	<div>     twdeploy cmd</div>
+
+	<div>     fbpackage</div>
+
+	<div>     port</div>
+
+	<div><br/></div>
+
+	<div>13:00-15:00</div>
+
+	<div>     talk with Kenny asked about design detail, fbcode basics</div>
+
+	<div><br/></div>
+
+	<div>15:00-18:00 21:30-00:30</div>
+
+	<div>     tw port task design</div>
+
+	<div><br/></div>
+
+	<div>Hi Kenny I found the problem became a bit more complicated if I wrap all the concurrency mechanism in PortAllocator class. Because in the current codebase another block of code is added behind the AgentUtil::bindAndSubstituteArgs in ProcessExecute. </div>
+
+	<div>( ProcessExecutor.cpp 218-229) In which </div>
+
+	<div><br/></div>
+
+	<div><br/></div>
+
+	<div><br/></div>
+
+	<div>Note to mail.</div>
+
+	<div>     1. error return before mutex unlock</div>
+
+	<div>     2. directory manager only bind but no kill process</div>
+
+	<div><br/></div>
+
+	<div><br/></div>
+
+	<div>I made some updates to the implementation details we talked about this afternoon. </div>
+
+	<div>In order to avoid double reserve ports we create PortAllocator to store global port info. </div>
+
+	<div>1. Use mutex to synchronise PortAllocator between threads. But this could not be implemented at ProcessExecutor::execute level because bindAndSubstituteArgs is also called by DirectoryManager. This could not be implemented at bindAndSubstituteArgs level because freeport() is called just behind bindAndSubstituteArgs in ProcessExecute::execute in the current codebase. </div>
+
+	<div>Thus the mutex would be put at very low level Tool::nextFreePort in a very similar way as #4986900. Keep all other methods unchanged except adding one argument which passes PortAllocator object.</div>
+
+	<div><br/></div>
+
+	<div>2. Each time to find a new free port, the new port needs to be compared with both reserved ports and assigned ports. To make it simpler, I will combine reserved ports and assigned ports which means that when a port is reserved, it is tread as assigned.</div>
+
+	<div>Thus the problem needed to deal with is that all the ports assigned in the bindAndSubstituteArgs method should be released if the bindAndSubstituteArgs fails.</div>
+
+	<div><br/></div>
+
+	<div>3. Within DirectoryManager I can only find bindAndSubstituteArgs method being called to allocate new ports but I cannot find any method to kill the process or some similar function. So where should I release the ports?</div>
+
+	<div><br/></div>
+
+	<div>4. <a>https://phabricator.fb.com/diffusion/FBCODE/browse/master/tupperware/agent/ProcessExecutor.cpp;e4f3df52a59555e67be2054664d148cbd0f5302a$203-207</a> </div>
+
+	<div>If bindAndSubstituteArgs fails then method will return false without unlock the portMutex. I'm not sure if portMutex can be automatically released like a smart pointer. If it cannot, do we have a mutex class similar to smart mutex, or we should manual release it before return?</div>
+
+
+
+</body></html>

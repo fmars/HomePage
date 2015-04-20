@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="0.53062069416046"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-08 17:57:07 +0000"/><meta name="latitude" content="37.48487479580392"/><meta name="longitude" content="-122.1468729726043"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-09 04:19:45 +0000"/><title>04.08.2015</title></head><body>
+
+	<div>Daily</div>
+
+	<div>     move fast !</div>
+
+	<div>     c++ committee </div>
+
+	<div>TODO</div>
+
+	<div>     c++11</div>
+
+	<div>     Mesos paper</div><div>     tire pressure</div>
+
+	<div><br/></div>
+
+	<div>10:00 Continue TW</div>
+
+	<div><br/></div>
+
+	<div>May I ask couple questions about the code please?</div>
+
+	<div>     </div>
+
+	<div>1. Could you explain why you put a Mutex ahead of the port binding process? Since I didn't find any ProcessExecutor::execute multithreading running. Is it because the ServiceFramework start all the registered service as thread, and some other thread might interrupt this process like DirectoryManager?</div>
+
+	<div><br/></div>
+
+	<div><a>https://phabricator.fb.com/diffusion/FBCODE/browse/master/tupperware/agent/ProcessExecutor.cpp;e4f3df52a59555e67be2054664d148cbd0f5302a$203</a></div>
+
+	<div><br/></div>
+
+	<div>2. The reason why the previous fixed problem only works for non-lxc tasks but not for lxc tasks is that lxc tasks DirectoryManager also reserves ports.</div>
+
+	<div><br/></div>
+
+	<div>I found both DirectoryManager and ProcessExecutor call the same function AgentUtil::bindAndSubstituteArgs and eventually call Tools::nextFreePort. So instead of adding another PortAllocator state to DirectoryManager, can we add some static structure in either AgentUtil level or Tool level as state?</div>
+
+	<div><br/></div>
+
+	<div>Thus we can 1. deal everything about port within AgentUtil level and get rid of all the mechanism outside  2. Reduce the granularity of mutex to a smaller scope in AgentUtil function.</div>
+
+	<div><br/></div>
+
+	<div>COOL </div>
+
+	<div><br/></div>
+
+	<div>13:00 unit test</div>
+
+	<div>15:00 mentor 1on1</div>
+
+	<div>16:00 Scribe team intro</div>
+
+	<div>19:00 TW Task design</div>
+
+	<div>     Thanks for answering. I'm pretty new to test(unit test) and multithread. Could you briefly explain why static state is difficult to test?</div>
+
+	<div>     Using singleton object would be great. But I still tend to make bindAndSubstituteArgs itself thread safe, rather then building a thread sate environment within caller function when each time needs to call bindAndSubstituteArgs. </div>
+
+	<div>     May I take you some time to in person discuss  implementation details and ask some basic fbcode questions since seems no related bootcamp office hours this week? Thanks.</div>
+
+	<div><br/></div>
+
+	<div>20:00 </div>
+
+	<div>     singleton object, global static variable</div>
+
+
+
+</body></html>
