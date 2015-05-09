@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="0.7029939889907837"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-05-05 17:53:09 +0000"/><meta name="latitude" content="37.48505838517283"/><meta name="longitude" content="-122.1477492562654"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-05-06 06:17:34 +0000"/><title>05.05.2015</title></head><body>
+<div>1. worker num</div>
+<div>2. pool, lbpool</div>
+<div><br/></div>
+<div>-- what is machine name in continues_keanu_web.py context</div>
+<div>          the hierarchy of smc tier</div>
+<div>          tier.services{ <span style="color: rgb(20, 24, 35); font-family: HelveticaNeue, 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);">The combination of a hostname and port make up a logical "service" within SMC}</span></div>
+<div><span style="color: rgb(20, 24, 35); font-family: HelveticaNeue, 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);">    </span></div>
+<div><span style="color: rgb(20, 24, 35); font-family: HelveticaNeue, 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);">          does the port is included in this context? seems no </span></div>
+<div><span style="font-family: HelveticaNeue, 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;"><span style="color: rgb(20, 24, 35);">          worker2host = {get_worker_name(i): svc.hostname for </span></span><span style="font-family: HelveticaNeue, 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;"><span style="color: rgb(20, 24, 35);">i, svc in enumerate(new_hosts)}</span></span></div>
+<div><font color="#141823" face="HelveticaNeue, Helvetica Neue, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif">          Where can I find the definition file</font></div>
+<div><span style="font-family: HelveticaNeue, 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;"><span style="color: rgb(20, 24, 35);"><br/></span></span></div>
+<div>-- how to get and set configure file</div>
+<div>     glb_proxy_server.py:: get_glbconfig_json_content</div>
+<div>-- where to put (smc.tier == configerator file)</div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div>from __future__ import absolute_import</div>
+<div>from __future__ import division</div>
+<div>from __future__ import print_function</div>
+<div>from __future__ import unicode_literals</div>
+<div><br/></div>
+<div>from libfb.employee import uid_to_unixname</div>
+<div>from keanu.core.util import current_user</div>
+<div>from keanu.core.util import Logger</div>
+<div>import keanu.core.globals as gb</div>
+<div>import time</div>
+<div>import json</div>
+<div>import urllib</div>
+<div>from datetime import datetime</div>
+<div><br/></div>
+<div>from configerator.mutator import ConfigeratorMutatorService</div>
+<div>from configerator.structs.artillery.policy.ttypes import (</div>
+<div>Policy, PolicyRestraint, Restraint, StringRestraint, RestraintType)</div>
+<div>from libfb.py.thrift_clients.configerator_mutator_thrift_client_factory \</div>
+<div>import ConfigeratorMutatorThriftClientFactory</div>
+<div>from configerator.compiler import configerator</div>
+<div>from keanu.strategies import ArtilleryStrategy</div>
+<div><br/></div>
+<div>from RockfortExpress.ttypes import QueryCommon</div>
+<div>from rfe import client as rfe_client</div>
+<div>from libfb.fburl import get_fburl</div>
+<div><br/></div>
+<div>g = gb.Options()</div>
+<div><br/></div>
+<div><br/></div>
+<div>def _artillery_query(sql):</div>
+<div>query_common = QueryCommon(</div>
+<div>instance='artillery',</div>
+<div>user_name=uid_to_unixname(current_user()),</div>
+<div>user_id=current_user(),</div>
+<div>)</div>
+<div>conn = rfe_client.getClient()</div>
+<div>result = conn.querySQL(query_common, sql)</div>
+<div>if not result.valid:</div>
+<div>Logger.error('Scuba query result is not valid')</div>
+<div>return result</div>
+<div><br/></div>
+<div>class ArtilleryAnomalies(object):</div>
+<div>def __init__(self, start_time, end_time):</div>
+<div>self.policy_name = 'keanu.loadtest.1'</div>
+<div>self.start_time = start_time</div>
+<div>self.end_time = end_time</div>
+<div><br/></div>
+<div>def find_slowest_endpoints(self):</div>
+<div>''' Query artillery and find the endpoints with the most latency</div>
+<div>over the testing time period '''</div>
+<div># query that fetches latency values for each page (endpoint)</div>
+<div>endpoint_query = '''</div>
+<div>SELECT</div>
+<div>COUNT(1) as `samples`,</div>
+<div>APPROX_PERCENTILE(`e2e_duration`, 0.95) as `latency`,</div>
+<div>`page`</div>
+<div>FROM `artillery`</div>
+<div>WHERE</div>
+<div>{start_time} &lt;= time AND</div>
+<div>time &lt;= {end_time} AND</div>
+<div>INCLUDES(`active_policies`,ARRAY('{policy}'))</div>
+<div>GROUP BY `page`</div>
+<div>ORDER BY `samples` DESC</div>
+<div>LIMIT 200'''</div>
+<div>endpoints = _artillery_query(endpoint_query.format(</div>
+<div>policy=self.policy_name,</div>
+<div>start_time=self.start_time,</div>
+<div>end_time=self.end_time</div>
+<div>))</div>
+<div>latency_index = endpoints.headers.index('latency')</div>
+<div>page_index = endpoints.headers.index('page')</div>
+<div>endpoints = endpoints.value</div>
+<div># sort by latency</div>
+<div>endpoints.sort(key=lambda x: x[latency_index], reverse=True)</div>
+<div># choose the top 10 and return the endpoint names</div>
+<div>return [e[page_index] for e in endpoints[:10]]</div>
+<div><br/></div>
+<div>def e2e_latency_link(self):</div>
+<div>''' generate a fburl that shows end to end link latency</div>
+<div><br/></div>
+<div>e.g. https://fburl.com/78030786'''</div>
+<div>start_time = datetime.fromtimestamp(self.start_time)</div>
+<div>end_time = datetime.fromtimestamp(self.end_time)</div>
+<div>drillstate = urllib.quote(json.dumps({</div>
+<div>"cols": ['e2e_duration', 'tti_duration'],</div>
+<div>"derivedCols": [],</div>
+<div>"start": start_time.strftime('%Y-%m-%d %l:%M%P'),</div>
+<div>"end": end_time.strftime('%Y-%m-%d %l:%M%P'),</div>
+<div>"compare": 'none',</div>
+<div>"minBucketSamples": '',</div>
+<div>"dimensions": ['cluster_id'],</div>
+<div>"order": '',</div>
+<div>"metric": 'p90',</div>
+<div>"top": '7',</div>
+<div>"axes": "linked",</div>
+<div>"time_bucket": "fine",</div>
+<div>"scale_type": "absolute",</div>
+<div>"compare_mode": "normal",</div>
+<div>"overlay_types": [],</div>
+<div>"anchors": [],</div>
+<div>"c_constraints":</div>
+<div>{"active_policies":</div>
+<div>{"all": ['["%s"]' % self.policy_name]},</div>
+<div>"joined": {"eq": ['["1"]']}},</div>
+<div>"constraints": {"active_policies":</div>
+<div>{"all": ['["%s"]' % self.policy_name]},</div>
+<div>"joined": {"eq": ['["1"]']}}}))</div>
+<div><br/></div>
+<div>e2e_scuba = 'https://our.cstools.facebook.com/intern/scuba/query?' \</div>
+<div>'dataset=artillery&amp;' \</div>
+<div>'drillstate=%s' \</div>
+<div>'&amp;view=Time'</div>
+<div>return get_fburl(e2e_scuba % drillstate)</div>
+<div><br/></div>
+<div>class RealArtilleryStrategy(ArtilleryStrategy):</div>
+<div>strategy = 'cluster'</div>
+<div>config_path = 'artillery/policy/'</div>
+<div><br/></div>
+<div>def __init__(self, clusters):</div>
+<div>self.clusters = clusters</div>
+<div>self.mutator = ConfigeratorMutatorThriftClientFactory().getClient()</div>
+<div>self.policy_name = 'keanu.loadtest.1'</div>
+<div>self.dryrun = g.dryrun</div>
+<div><br/></div>
+<div>def _generate_config(self, diff_info):</div>
+<div>''' template for a complete configerator change '''</div>
+<div>config = ConfigeratorMutatorService.SetConfigArgs()</div>
+<div>config.author = "Keanu"</div>
+<div>config.authorEmail = "keanu@fb.com"</div>
+<div>config.message = diff_info</div>
+<div><br/></div>
+<div>if self.dryrun:</div>
+<div>config.dryRun = ConfigeratorMutatorService.DryRunArgs()</div>
+<div>config.dryRun.differentialIDType = 2</div>
+<div>config.dryRun.compileDependencies = True</div>
+<div><br/></div>
+<div>return config</div>
+<div><br/></div>
+<div>def _generate_config_change(self, configName, configContents, rootType):</div>
+<div>''' template for a single file change in a configerator change '''</div>
+<div>config_contents = ConfigeratorMutatorService.ConfigContents()</div>
+<div>config_contents.thriftIncludes = [</div>
+<div>RealArtilleryStrategy.config_path + 'policy.thrift'</div>
+<div>]</div>
+<div>config_contents.configName = RealArtilleryStrategy.config_path + \</div>
+<div>configName</div>
+<div>config_contents.configContents = configContents</div>
+<div>config_contents.rootType = rootType</div>
+<div>return config_contents</div>
+<div><br/></div>
+<div>def enable(self):</div>
+<div>''' enable artillery for the duration of this test '''</div>
+<div>try:</div>
+<div># restraint</div>
+<div>restraint_config = self._generate_config_change(</div>
+<div>configName='restraints/' + self.policy_name,</div>
+<div>configContents=configerator.serializeConfigToJSON(</div>
+<div>PolicyRestraint(</div>
+<div>status=True,</div>
+<div>accept=Restraint(</div>
+<div>integer_restraints=[],</div>
+<div>boolean_restraints=[],</div>
+<div>string_restraints=[</div>
+<div>StringRestraint(</div>
+<div>type=RestraintType.CLUSTER_IDS,</div>
+<div>strings=set(self.clusters)),</div>
+<div>]),</div>
+<div>deny=Restraint(</div>
+<div>integer_restraints=[],</div>
+<div>boolean_restraints=[],</div>
+<div>string_restraints=[],</div>
+<div>)</div>
+<div>)),</div>
+<div>rootType="PolicyRestraint")</div>
+<div><br/></div>
+<div>sampling_config = self._generate_config_change(</div>
+<div>configName='sampling_data/' + self.policy_name,</div>
+<div>configContents=</div>
+<div>configerator.serializeConfigToJSON(</div>
+<div>Policy(</div>
+<div># expire this policy after 10 hours</div>
+<div>valid_until=int(time.time() + 60 * 60 * 10),</div>
+<div>desired_rate=-1.,</div>
+<div>turn_on_fbtrace=False,</div>
+<div>coin_flip_inverse=100001,</div>
+<div>cconf=self.policy_name</div>
+<div>)),</div>
+<div>rootType="Policy")</div>
+<div><br/></div>
+<div>meta_data = json.loads(self.mutator.getConfig(</div>
+<div>RealArtilleryStrategy.config_path + 'meta_data/' +</div>
+<div>self.policy_name).configContents)</div>
+<div>meta_data['updated_at'] = int(time.time())</div>
+<div><br/></div>
+<div>meta_data_config = self._generate_config_change(</div>
+<div>configName='meta_data/' + self.policy_name,</div>
+<div>rootType='PolicyMetaData',</div>
+<div>configContents=json.dumps(meta_data)</div>
+<div>)</div>
+<div><br/></div>
+<div>diff_info = ConfigeratorMutatorService.DifferentialInfo()</div>
+<div>diff_info.title = "[keanu_loadtest] Start Keanu monitoring"</div>
+<div>diff_info.summary =\</div>
+<div>"Turn on artillery monitoring for load test"</div>
+<div>diff_info.testPlan = 'Tested automation script'</div>
+<div><br/></div>
+<div>config = self._generate_config(diff_info)</div>
+<div>config.values = [</div>
+<div>restraint_config,</div>
+<div>sampling_config,</div>
+<div>meta_data_config]</div>
+<div>config.dependentConfigNames = [</div>
+<div>'artillery/policy/policy_map',</div>
+<div>'artillery/policy/policy_active_map',</div>
+<div>]</div>
+<div><br/></div>
+<div>response = self.mutator.setMultiConfig(config)</div>
+<div>if self.dryrun:</div>
+<div>Logger.debug('Artillery diff id D%d' % response.diffID)</div>
+<div>Logger.debug("Artillery monitoring on")</div>
+<div>except Exception as e:</div>
+<div>Logger.error("Unable to turn artillery monitoring on")</div>
+<div>Logger.error(str(e))</div>
+<div>raise</div>
+<div><br/></div>
+<div>def disable(self):</div>
+<div>''' turn off artillery monitoring for the end of a test '''</div>
+<div>meta_data = json.loads(self.mutator.getConfig(</div>
+<div>RealArtilleryStrategy.config_path + 'meta_data/' +</div>
+<div>self.policy_name).configContents)</div>
+<div>meta_data['updated_at'] = int(time.time())</div>
+<div><br/></div>
+<div>meta_data_config = self._generate_config_change(</div>
+<div>configName='meta_data/' + self.policy_name,</div>
+<div>rootType='PolicyMetaData',</div>
+<div>configContents=json.dumps(meta_data)</div>
+<div>)</div>
+<div><br/></div>
+<div>path = RealArtilleryStrategy.config_path + 'sampling_data/' + \</div>
+<div>self.policy_name</div>
+<div>sampling_data = json.loads(self.mutator.getConfig(path).configContents)</div>
+<div>sampling_data['valid_until'] = 1</div>
+<div>sampling_data = json.dumps(sampling_data)</div>
+<div><br/></div>
+<div>sampling_config = ConfigeratorMutatorService.ConfigContents()</div>
+<div>sampling_config.configName = path</div>
+<div>sampling_config.configContents = sampling_data</div>
+<div>sampling_config.rootType = "Policy"</div>
+<div>sampling_config.thriftIncludes = [</div>
+<div>RealArtilleryStrategy.config_path + 'policy.thrift'</div>
+<div>]</div>
+<div><br/></div>
+<div>diff_info = ConfigeratorMutatorService.DifferentialInfo()</div>
+<div>diff_info.title = "[keanu_loadtest] Disable Keanu loadtest monitoring"</div>
+<div>diff_info.summary =\</div>
+<div>"Turn off artillery monitoring for load test"</div>
+<div>diff_info.testPlan = 'Tested automation script'</div>
+<div><br/></div>
+<div>config = self._generate_config(diff_info)</div>
+<div>config.values = [sampling_config, meta_data_config]</div>
+<div>config.dependentConfigNames = [</div>
+<div>'artillery/policy/policy_map',</div>
+<div>'artillery/policy/policy_active_map',</div>
+<div>]</div>
+<div><br/></div>
+<div>response = self.mutator.setMultiConfig(config)</div>
+<div>if self.dryrun:</div>
+<div>Logger.debug('Artillery config diff D%d' % response.diffID)</div>
+<div>Logger.debug("Artillery monitoring off")</div>
+<div><br/></div>
+<div>if __name__ == '__main__':</div>
+<div>anomalies = RealArtilleryStrategy(['prn1c12'])</div>
+<div>anomalies.dryrun = False</div>
+<div>anomalies.disable()</div>
+<div>#print(anomalies.find_slowest_endpoints())</div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div>admarket/adlogger/scripts/mutator/dataMonitorConfigMutator.py</div>
+<div><br/></div>
+<div><br/></div>
+<div>from configerator.mutator import ConfigeratorMutatorService</div>
+<div>from keanu.keanu_load_test_clusters.ttypes import LoadTestClusters</div>
+<div>
+<div>from libfb.py.thrift_clients.configerator_mutator_thrift_client_factory \ import ConfigeratorMutatorThriftClientFactory</div>
+</div>
+<div><br/></div>
+<div>ltc = LoadTestClusters()</div>
+<div>configName='keanu/load_test_clusters/keanu_load_test_clusters'</div>
+<div>mutator = ConfigeratorMutatorThriftClientFactory().getClient()</div>
+<div>ltc.readFromJson(mutator.getConfig(configName).configContents)</div>
+<div>from configerator.compiler import configerator</div>
+<div>configJson = configerator.serializeConfigToJSON(ltc)</div>
+<div><br/></div>
+<div><br/></div>
+<div>add parameter --enable no quickling</div>
+<div>31 = hostnum</div>
+<div><br/></div>
+<div>Currently the comparison between load test running on v2 and v3 is not fair because sometimes quickling will happen on v3 however the same thing will never happen in v2. The idea is to disable the quickling in v3 of machines which load test is running on.</div>
+<div>To do so a config file called 'no_quickling' is created. Before a load test starting, the host machines which load test is running on will be added to a list in 'no_quickling' config file. And the php code which decides whether to do a quickling will read this list and disable quickling for these machines. After load test the host machines will be removed from the list.</div>
+<div>In order to avoid frequently changing 'no_quickling' config file each time when a load test start and end, the update operation will be only happened at the beginning of the first worker and the ending of the last worker.</div>
+<div><br/></div>
+<div>Please note that I am submitting this for feedback. I know that there should be another diff to change php code which checks the quickling version and test this code as well. <span style="color: rgb(0, 0, 0); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);"> I will go back and finish them once I'm sure reviewers are happy with the change.</span></div>
+<div><br/></div>
+<div><br/></div>
+</body></html>

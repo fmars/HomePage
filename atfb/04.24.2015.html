@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="-0.61153924465179"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-24 17:25:47 +0000"/><meta name="latitude" content="37.48474003712494"/><meta name="longitude" content="-122.1474014373118"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-24 22:10:57 +0000"/><title>04.24.2015</title></head><body>
+<div>10:00 how tw-mount come by</div>
+<div>     mount --bind, --shared, --slave</div>
+<div>     symlink can be empty source but mount --bind cannot</div>
+<div>     symlink target must not exist however mount --bind must exist</div>
+<div>     non-copyable</div>
+<div><br/></div>
+<div>SystemUtil*system_ = new SystemUtil();</div>
+<div>LOG(INFO) &lt;&lt; "FJC";</div>
+<div>string hostPath = pathJoin(pathJoin("/sys/fs/cgroup/cpuset", handle),</div>
+<div>"cpuset.cpus");</div>
+<div>string chrootPath = pathJoin(chrootDir, "/sys/devices/system/cpu/online");</div>
+<div>if (!system_-&gt;bindMount(hostPath, chrootPath)) {</div>
+<div>LOG(ERROR) &lt;&lt; "Failed to mount " &lt;&lt; hostPath &lt;&lt; " to " &lt;&lt; chrootPath;</div>
+<div>LOG(ERROR) &lt;&lt; "Curent uid "&lt;&lt;getuid() &lt;&lt;" curent euid"&lt;&lt;geteuid();</div>
+<div>//return false;</div>
+<div>}</div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div># Copyright 2004-present Facebook. All Rights Reserved.</div>
+<div><br/></div>
+<div>my_job = Job(</div>
+<div>cluster = 'prn2c10',</div>
+<div>user = 'fjc',</div>
+<div>name = 'put-bindmount-to-processorexecutor-2',</div>
+<div><br/></div>
+<div>command = 'sleep 10000',</div>
+<div><br/></div>
+<div>packages = [],</div>
+<div>enable_lxc = True,</div>
+<div><br/></div>
+<div># Run one instance of this service only.</div>
+<div>scheduling = Scheduling(</div>
+<div>replicas=1,</div>
+<div>machines = [</div>
+<div>"dev2087.prn2.facebook.com",</div>
+<div>],</div>
+<div>),</div>
+<div><br/></div>
+<div>resource_limit = ResourceLimit(cpu=1,ram='64M',enforce=True),</div>
+<div><br/></div>
+<div>job_priority = JobPriority.JOB_PRIORITY_KILLABLE,</div>
+<div><br/></div>
+<div>ownership = Ownership(oncall_team='tw_bootcamp_onboarding_mpk',</div>
+<div>org_team='Core Systems'),</div>
+<div>)</div>
+<div><br/></div>
+<div>exportJobs(my_job)</div>
+<div><br/></div>
+<div>13:00 move bind mount from DirectoryManager to ProcessExecutor</div>
+<div>     fount cannot ssh to task</div>
+<div>     migrate to the new deserver </div>
+</body></html>

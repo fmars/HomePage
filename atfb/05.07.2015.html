@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="-0.1241389438509941"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-05-07 16:21:04 +0000"/><meta name="latitude" content="37.48506406505818"/><meta name="longitude" content="-122.1476738943122"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-05-08 03:11:00 +0000"/><title>05.07.2015</title></head><body>
+<div>
+<div>
+<div>TODO write</div>
+<div>
+<div>     啥都不懂就做不下去，问都不知道该问啥，草</div>
+<div>     move fast history fucking task( not as google try to do something big, instead do anything from scrch when needed)</div>
+<div>     procedure to anasys this task online processor</div>
+<div>     强行看代码</div>
+</div>
+</div>
+<div>     你不去你怎么知道怎么样。别偷懒</div>
+<div>TODO</div>
+<div>     vim plugins: ctags, cscope  </div>
+<div>     flight membership </div>
+</div>
+<div>     房费</div>
+<div>     mosh</div>
+<div>     dmitri post</div>
+<div>     task review</div>
+<div><br/></div>
+<div><br/></div>
+<div>09:20</div>
+<div>     talk with bin</div>
+<div>     mosh</div>
+<div>     reply Dmitri review</div>
+<div>10:15     </div>
+<div>     mysql task </div>
+<div>10:45-12:00</div>
+<div>     meeting with tian to talk about task</div>
+<div>12:00 start to continue mysql work</div>
+<div>     @innodb_rows_deleted_orig = (SELECT variable_value FROM information_schema.global_status WHERE LOWER(variable_name) = 'innodb_rows_deleted');</div>
+<div>13:30 continue mysql task test </div>
+<div>     vim replace</div>
+<div><br/></div>
+<div>15:00 talk with Jon</div>
+<div>15:30 amend mysql task</div>
+<div><br/></div>
+<div>%s/select variable_value into @innodb_row_recreations_ori from information_schema.global_status where lower(variable_name) = 'innodb_row_recreations';/let @innodb_row_recreations_ori = query_get_value(show status like "innodb_row_recreations", value, 1);</div>
+<div><br/></div>
+<div>%s/select variable_value into @innodb_row_recreation_steps_ori from information_schema.global_status where lower(variable_name) = 'innodb_row_recreation_steps';/let @innodb_row_recreation_steps_ori = query_get_value(show status like "innodb_row_recreation_steps", value, 1);</div>
+<div><br/></div>
+<div>%s/select variable_value into @innodb_row_recreations_cur from information_schema.global_status where lower(variable_name) = 'innodb_row_recreations';/let @innodb_row_recreations_cur = query_get_value(show status like "innodb_row_recreations", value, 1);</div>
+<div><br/></div>
+<div>%s/select variable_value into @innodb_row_recreation_steps_cur from information_schema.global_status where lower(variable_name) = 'innodb_row_recreation_steps';/let @innodb_row_recreation_steps_cur = query_get_value(show status like "innodb_row_recreation_steps", value, 1);</div>
+<div><br/></div>
+<div>%s/select $innodb_row_recreations_cur - $innodb_row_recreations_ori, 'innodb_row_recreations diff should be 0'/eval select $innodb_row_recreations_cur - $innodb_row_recreations_ori as innodb_row_recreations/g</div>
+<div><br/></div>
+<div>%s/select $innodb_row_recreation_steps_cur - $innodb_row_recreation_steps_ori, 'innodb_row_recreation_steps diff should be 0'/eval select $innodb_row_recreation_steps_cur - $innodb_row_recreation_steps_ori as innodb_row_recreation_steps;/gc</div>
+<div><br/></div>
+<div>19:30 </div>
+<div>     ctag</div>
+<div>     ls -lh</div>
+<div>     nerdtree</div>
+</body></html>

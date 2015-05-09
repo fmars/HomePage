@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="-0.4626153707504272"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-27 18:06:31 +0000"/><meta name="latitude" content="37.48478042053182"/><meta name="longitude" content="-122.147354945037"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-28 06:35:38 +0000"/><title>04.27.2015</title></head><body>
+<div>9:30 talk with XDC -11：30</div>
+<div><br/></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;">~/fbcode/_bin/dragon/updateservice/dragon_update_service --simulate_write=1 --log_device_cluster=logdevice.dragon.prn1 \</span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;">--log_device_config_url=configerator:logdevice/logdevice.dragon.prn1.conf --smc_tiername=updateservice.dragon.dev \ --config_prefix=dragon --wh_app_name=updateservice.dragon.dev --enable_wh_update=1 --port=10002 \ --wh_subscription_port=10005 --wh_fb303_port=10006 --v=1 --minloglevel=0 --logtostderr=0 --log_dir=/tmp/logs/dus \ --logtofiles=1 --enable_dynamic_filter_change=1</span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;">13：00-13：30 talk with yun</span></div>
+<div><span style="font-family: Menlo;">14:00-18:00 working on dragon task</span></div>
+<div><span style="font-family: Menlo;">18:00 talking with db team manager</span></div>
+<div><span style="font-family: Menlo;">20:00-23:00 working on dragon task</span></div>
+<div><span style="font-family: Menlo;"><br/></span></div>
+<div><span style="font-family: Menlo;">Dragon Task</span></div>
+<div><span style="font-family: Menlo;">     how to run dragon locally</span></div>
+<div><span style="font-family: Menlo;">     how thrift service work * pretty cool</span></div>
+<div><span style="font-family: Menlo;">     some basics about service<br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;">/mnt/vol/engshare/admin/scripts/query_dragon --host=localhost --port=12345   "(term (assoc 167367433327742) () ((name A*)))" --uid 100003474011242 --wild_card 1 --attr_value 1 --shard_override=1</span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo, Consolas, Monaco, monospace;"><br/></span></div>
+<div><span style="font-family: Menlo;">22:30</span></div>
+<div><font face="Menlo">currently machines in DUS tier don't show a valid fb303 status page. Non-Du's machines do it correctly. Since dragon_update_service.thrift is based on fb303.thrift in which getStatus is defined. So after implementing getStatus method in DragonUpdateService the fb303 status page should work well.</font></div>
+</body></html>

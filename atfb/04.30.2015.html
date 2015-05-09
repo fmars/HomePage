@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="0.3291376829147339"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-30 18:31:57 +0000"/><meta name="latitude" content="37.48514578653437"/><meta name="longitude" content="-122.1477835370134"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-05-05 05:53:37 +0000"/><title>04.30.2015</title></head><body>
+<div>
+<div>_build/dbg/keanu/keanu.lpar.ipython</div>
+<div><br/></div>
+<div>from keanu.traffic_shifter import glb_proxy_client</div>
+<div><span style="color: rgb(0, 0, 0); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);">client = glb_proxy_client.GLBProxyThriftClient.for_localhost(1234)</span></div>
+<div>client.get_clusters_info_with_type(["ash5c03"],"alpha")</div>
+<div>client.get_clusters_info_with_type(["ash4c07"],"proxy")</div>
+</div>
+<div>client.get_clusters_info(["ash4c07"])</div>
+<div><br/></div>
+<div><br/></div>
+<div>from keanu.traffic.glbproxyshifter import GLBProxyShifter</div>
+<div>import keanu.core.globals</div>
+<div>g = keanu.core.globals.Options()</div>
+<div>g.set_keanu_mode(False)</div>
+<div>g.clusters="ash1c14"</div>
+<div>shifter = GLBProxyShifter()</div>
+<div><br/></div>
+<div>clusters =["ash4c07","ash5c01","ash5c03","prn2c04","prn1c12"]</div>
+<div>cluster_type = "proxy"</div>
+<div>shifter.get_clusters_ratios(clusters,cluster_type)</div>
+<div><br/></div>
+<div>clusters = ["ash5c03","atn1c03","frc1c09"]</div>
+<div>cluster_type = "alpha"</div>
+<div><br/></div>
+<div>clusters = ["frc3c09"]</div>
+<div>cluster_type = "wit"</div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div>~/fbcode/_build/dbg/web/simple_traffic_shifter/simple-traffic-shifter.lpar ash4c07:1 ash5c01:1 ash5c03:1 --durations-minutes 100</div>
+<div><br/></div>
+<div>~/fbcode/_build/dbg/web/simple_traffic_shifter/simple-traffic-shifter.lpar ash5c03:1 atn1c03:1 frc1c09:1 --cluster-type alpha --duration-minutes 100</div>
+<div><br/></div>
+<div>This is the second diff of the task. The current simple traffic shifter script only works for FE clusters. It first gets all FE clusters infos from server. Then validates if the target clusters are included by all FE clusters. Then start to schedule traffic shifter.</div>
+<div><br/></div>
+<div>In order to make script work for non FE clusters. A new method called get_clusters_ratios in glbproxyshifter is created which can fetch drain ratio of specific cluster from server. Then instead of getting all the clusters infos from server, simple traffic shifter will pass the target clusters with cluster type to new created method and get only drain ratios from target clusters. </div>
+<div><br/></div>
+<div>Now because any type of clusters may be set as target clusters rather then just proxy clusters. So _validate_targets() is useless now which test if all target clusters belong to proxy clusters. Now we add a new validate method called _validate_current_ratios which will check if all target clusters get the corresponding drain ratio from server side. </div>
+<div><br/></div>
+<div>Note that I just start to write python code so if you see any my python code looks like C++ please advice me : )</div>
+<div><br/></div>
+<div>1. Test the GLBProxyShifter::get_clusters_ratios(self, clusters, cluster_type) is able to get drain ratio from server with all types of </div>
+<div><br/></div>
+<div>shifter = GLBProxyShifter()</div>
+<div>     </div>
+<div>// type of cluster is "proxy"</div>
+<div>clusters =["ash4c07","ash5c01","ash5c03","prn2c04","prn1c12"]</div>
+<div>cluster_type = "proxy"</div>
+<div>shifter.get_clusters_ratios(clusters,cluster_type)</div>
+<div><br/></div>
+<div>//type of cluster is "alpha"</div>
+<div>clusters = ["ash5c03","atn1c03","frc1c09"]</div>
+<div>cluster_type = "alpha"</div>
+<div><br/></div>
+<div> //type of cluster is "wit"</div>
+<div>clusters = ["frc3c09"]</div>
+<div>cluster_type = "wit"</div>
+<div><br/></div>
+<div>2. Test simple_traffic_shifter is able to get the is able to get drain ratio from server with all types of clusters.</div>
+<div><br/></div>
+<div>//not set --cluster-type which default is "proxy"</div>
+<div>simple-traffic-shifter.lpar ash4c07:1 ash5c01:1 ash15c03:1 --duration-minutes 100</div>
+<div>//set --cluster-type as alpha</div>
+<div>simple-traffic-shifter.lpar ash5c03:1 --cluster-type alpha --duration-minutes 100</div>
+<div>     </div>
+<div>3. Test validation method by passing invalid cluster name as target cluster</div>
+<div><br/></div>
+<div>     simple-traffic-shifter.lpar wrong_cluster:1 --cluster-type alpha --duration-minutes 10        </div>
+<div><br/></div>
+<div><br/></div>
+<div>g7f5d5 </div>
+<div><br/></div>
+<div>     </div>
+<div><br/></div>
+</body></html>

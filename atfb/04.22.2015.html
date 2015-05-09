@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="8.1820821762085"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-22 16:42:38 +0000"/><meta name="latitude" content="37.55974692254996"/><meta name="longitude" content="-122.0309789553044"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-25 05:21:00 +0000"/><title>04.22.2015</title></head><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+<div>TODO write</div>
+<div>     啥都不懂就做不下去，问都不知道该问啥，草</div>
+<div>     move fast history fucking task( not as google try to do something big, instead do anything from scrch when needed)</div>
+<div>     procedure to anasys this task online processor</div>
+<div><br/></div>
+<div>TODO</div>
+<div>     UCI graduation</div>
+<div>     --commit from a wrong base</div>
+<div><br/></div>
+<div>I did the test as you mentioned yesterday. Now I'm pre sure that the two paths in symlink is correct.</div>
+<div>However the test still failed and the log shows that cannot symlink from "/sys/fs/cgroup/cpuset/taskHandle/cpuset.cpus" to "/newRoot/sys/devices/system/cpu/online".</div>
+<div>I found I just cannot symlink from cpuset.cpus to /newRoot/sys/ but can symlink to other directories under /newRoot/ like /newRoot/dev. And I find the permission of /newRoot/sys is dr-xr-xr-x. So I changed <a href="https://phabricator.fb.com/diffusion/FBCODE/browse/master/tupperware/agent/DirectoryManager.cpp;8d439782037679668fad14964fe15c8e4abe2e12$671">https://phabricator.fb.com/diffusion/FBCODE/browse/master/tupperware/agent/DirectoryManager.cpp;8d439782037679668fad14964fe15c8e4abe2e12$671</a>  from 755 to 777.</div>
+<div>I run the agent again but found the permission of /newRoot/sys is still 755. Do you have any idea about this please?</div>
+<div><br/></div>
+<div>09:40 talk with task-online with POC</div>
+<div>10:30 start task-python</div>
+<div><br/></div>
+<div>13:00 continue task-python</div>
+<div>     where is configurator processed</div>
+<div>     where does monitoring config being validate</div>
+<div>     how to test it</div>
+<div><br/></div>
+<div>13:50 ask aravind</div>
+<div>     Hey Aravind, I'm doing check configerator task <a href="https://our.cstools.facebook.com/intern/tasks/?t=2156104">https://our.cstools.facebook.com/intern/tasks/?t=2156104</a>. May I ask a question?</div>
+<div>Do we just need to check if configurator configs exist? Or do we also want to check it has the correct extension like '.mon' in monitoring config checking?</div>
+<div>14:00</div>
+<div>     how to write unit test</div>
+<div>     how to not set extension set</div>
+<div><br/></div>
+<div><br/></div>
+<div># means that list&lt;string&gt; configerator_configs was set in the job</div>
+<div>if config_list:</div>
+<div># Check if configerator subscriptions in job specs exist</div>
+<div>for config in config_list:</div>
+<div>_validateConfigeratorConfig(config, '', 'configerator configs')</div>
+<div>pkgs.extend(packages.convertConfigeratorPaths(config_list,</div>
+<div>scriptOnConfigeratorUpdate))</div>
+<div><br/></div>
+<div>     continue implement and compile and unit test</div>
+<div><br/></div>
+<div>15:30 switch to tw-task-correct-count-online-processor</div>
+<div>     put symlink ahead </div>
+<div>     
+<table style="border-spacing: 0px; font-size: 12px; border: 1px solid rgb(204, 204, 204); color: rgb(20, 24, 35); font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+<tbody>
+<tr>
+<td colspan="5" style="font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif; font-size: 12px; text-align: left; color: rgb(78, 86, 101); border-left-width: 1px; border-left-style: solid; border-left-color: rgba(0, 0, 0, 0.0980392); padding: 8px; background-color: rgb(233, 234, 237);">
+<div style="overflow: auto;">E0422 16:12:45.000000 2416551 DirectoryManager.cpp:1720 (117-0)] /var/facebook/tupperware/agent/data/fjc/put-symlink-ahead/0/20150422.161245.145324.2401:db00:0020:a014:face:0000:0018:0000.2416213/sys/devices/system/cpu/online already exists and is not a symlink.<br/>
+E0422 16:12:45.000000 2416551 DirectoryManager.cpp:682 (117-0)] FFFFF000</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div><br/></div>
+<div>18:30</div>
+<div><br/></div>
+<div>This code is used to specify this flag as false when runs in the ads_cluster instead of true in default setting.</div>
+<div>Because I think we are now using configerator to set this value and this should be done in specific cluster config file by cluster specific override.</div>
+<div><br/></div>
+<div>22:00 continue task online processor to see to connect with agent</div>
+</body></html>

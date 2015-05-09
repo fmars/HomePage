@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 5.5.1 (402628)"/><meta name="altitude" content="-0.2831606268882751"/><meta name="author" content="fmarsf@gmail.com"/><meta name="created" content="2015-04-21 17:19:46 +0000"/><meta name="latitude" content="37.48477291840469"/><meta name="longitude" content="-122.1473897062431"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-04-23 01:27:40 +0000"/><title>04.21.2015</title></head><body>
+<div>TODO write</div>
+<div>     啥都不懂就做不下去，问都不知道该问啥，草</div>
+<div>     move fast history fucking task</div>
+<div><br/></div>
+<div>TODO</div>
+<div>
+<div>     UCI graduation</div>
+</div>
+<div>     Insurance</div>
+<div>     mount unix file hierarchy</div>
+<div>     gtest test, test_f</div>
+<div>     yum</div>
+<div>     rpm</div>
+<div><br/></div>
+<div><br/></div>
+<div>08:30 getup</div>
+<div>09:00 breakfast- tw query</div>
+<div>10:00 tw port          </div>
+<div>11:00 finish modify tw port code and start test</div>
+<div><br/></div>
+<div><br/></div>
+<div>May I ask a question about the DirectoryManager</div>
+<div>1. I read the DirectoryManager but just found mkdir for '/sys' however I cannot find where '/sys/ is mounted. Is '/sys' mounted in AgentHelper or somewhere else?</div>
+<div>2. Just to make sure that what I need to do is to make a symbolic link from /sys/devices/system/cpu/online in chroot to /sys/fs/cgroup/cpuset/&lt;task&gt;/cpuset.cpus in host?</div>
+<div><br/></div>
+<div>Hey Nina, last one question please :)</div>
+<div>In order to make that symlink I need to know &lt;task&gt; which is the pretty long string in /sys/fs/cgroup/cpuset/&lt;task&gt;/cpuset.cpus. However I didn't know where to get it in prepareChroot because it seems &lt;task&gt; is not used nor stored in TaskSpec. </div>
+<div>I found /cgroup/cpuset/cpuset.cpus in chroot is the same as /sys/fs/cgroup/cpuset/&lt;task&gt;/cpuset.cpus in host. Can I use that one in chroot to make the symlink instead?</div>
+<div><br/></div>
+<div><br/></div>
+<div>16:25 find out the taskHandle in tw counts</div>
+<div>     1. where can I find task-handle</div>
+<div>     2. how does prepareChroot be called hierarchically ( how to pass task handle to it)</div>
+<div><br/></div>
+<div>17:00 diff</div>
+<div>     The current online processor count for LXC container stored in <span style="color: rgb(20, 24, 35); font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);">/sys/devices/system/cpu/online is not correct if the system resources are being constrained by cgroups. Make a symlink from correct value stored in /sys/fs/cgroup/cpuset/&lt;task&gt;/cpuset.cpus in host to <span style="color: rgb(20, 24, 35); font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(255, 255, 255);">/sys/devices/system/cpu/online in chroot to correct it. Create the symlink in DirectoryManage::prepareChroot after the file system setup.</span></span></div>
+<div><span style="font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif;"><span style="color: rgb(20, 24, 35);"><br/></span></span></div>
+<div><span style="font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif;"><span style="color: rgb(20, 24, 35);">18:30 correct and test tw-count</span></span></div>
+<div><span style="font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif;"><span style="color: rgb(20, 24, 35);"><span style="color: rgb(55, 62, 77); font-family: helvetica, arial, 'lucida grande', sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(246, 247, 248);">fbconfig -r tupperware/agent tupperware/</span></span></span><span style="font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif;"><span style="color: rgb(20, 24, 35);"><span style="color: rgb(55, 62, 77); font-family: helvetica, arial, 'lucida grande', sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(246, 247, 248);">experimental/</span></span></span><span style="font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif;"><span style="color: rgb(20, 24, 35);"><span style="color: rgb(55, 62, 77); font-family: helvetica, arial, 'lucida grande', sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(246, 247, 248);">connect tupperware/scripts &amp;&amp; fbmake dev -j32 &amp;&amp; rm -rf /tmp/rpm &amp;&amp; mkdir -p /tmp/rpm &amp;&amp; ./_bin/tupperware/agent/rpm/build.par --fbcode-dir=. --output-dir=/tmp/rpm/ &amp;&amp; sudo yum -y remove fb-tupperware-agent* &amp;&amp; sudo rpm -i /tmp/rpm/fb-tupperware-agent-*.x86_64.rpm;</span></span></span></div>
+<div><span style="font-size: 12px;"><span style="font-family: helvetica, arial, 'lucida grande', sans-serif;"><span style="background-color: rgb(246, 247, 248);"><span style="color: rgb(55, 62, 77);"><br/></span></span></span></span></div>
+<div><span style="color: rgb(55, 62, 77);"><span style="font-size: 12px;"><span style="font-family: helvetica;">22:00 </span></span></span></div>
+<div><font color="#373E4D" face="helvetica" size="2">     1 job { multiple tasks}</font></div>
+<div><span style="font-size: 12px;"><span style="font-family: helvetica;"><span style="color: rgb(55, 62, 77);"><br/></span></span></span></div>
+<div><span style="font-size: 12px;"><span style="font-family: helvetica;"><span style="color: rgb(55, 62, 77);">use symlink</span></span></span></div>
+<div><span style="font-size: 12px;"><span style="font-family: helvetica;"><span style="color: rgb(55, 62, 77);"><span style="color: rgb(78, 86, 101); font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(233, 234, 237);">E0421 23:26:55.000000 4068446 DirectoryManager.cpp:805 (117-0)] /sys/fs/cgroup/cpuset/2401:db00:0020:a014:face:0000:0018:0000.4068332.1429684015011552/cpuset.cpus</span></span></span></span>
+<div><span style="color: rgb(78, 86, 101); font-family: 'helvetica neue', helvetica, arial, 'lucida grande', sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(233, 234, 237);">E0421 23:26:55.000000 4068446 DirectoryManager.cpp:1672 (117-0)] /var/facebook/tupperware/agent/data/fjc/agent-local/0/20150421.232655.12507.2401:db00:0020:a014:face:0000:0018:0000.4068332/sys/devices/system/cpu/online already exists and is not a symlink.</span></div>
+</div>
+<div><span style="font-size: 12px;"><span style="font-family: helvetica;"><span style="color: rgb(55, 62, 77);"><br/></span></span></span></div>
+<div><span style="font-size: 12px;"><span style="font-family: helvetica;"><span style="color: rgb(55, 62, 77);"><br/></span></span></span></div>
+</body></html>
